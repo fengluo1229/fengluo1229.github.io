@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="centos 7,shadowsocks," />
 
 
 
@@ -79,13 +79,23 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="枫叶飘飘落长空">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Shadowsocks 搭建 基于centos 7搭建了一个ss，用了一些时间记录一下方便以后     获取vps，这次我采用的是DigitalOcean的vps 安装pip   安装epel扩展源sudo yum install epel-release   安装python-pipsudo yum -y install python-pip   升级pipsudo pip install --">
+<meta name="keywords" content="centos 7,shadowsocks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shadowsocks搭建与BBR加速">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/ss搭建/index.html">
 <meta property="og:site_name" content="枫叶飘飘落长空">
+<meta property="og:description" content="Shadowsocks 搭建 基于centos 7搭建了一个ss，用了一些时间记录一下方便以后     获取vps，这次我采用的是DigitalOcean的vps 安装pip   安装epel扩展源sudo yum install epel-release   安装python-pipsudo yum -y install python-pip   升级pipsudo pip install --">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/ss搭建/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/ss搭建/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/ss搭建/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/23/ss搭建/4.png">
+<meta property="og:updated_time" content="2018-03-23T13:06:09.331Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="枫叶飘飘落长空">
+<meta name="twitter:title" content="Shadowsocks搭建与BBR加速">
+<meta name="twitter:description" content="Shadowsocks 搭建 基于centos 7搭建了一个ss，用了一些时间记录一下方便以后     获取vps，这次我采用的是DigitalOcean的vps 安装pip   安装epel扩展源sudo yum install epel-release   安装python-pipsudo yum -y install python-pip   升级pipsudo pip install --">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/23/ss搭建/1.png">
 
 
 
@@ -115,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/23/ss搭建/"/>
 
 
 
 
 
-  <title>枫叶飘飘落长空</title>
+  <title>Shadowsocks搭建与BBR加速 | 枫叶飘飘落长空</title>
   
 
 
@@ -140,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -223,9 +232,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -255,9 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/23/ss搭建/" itemprop="url">Shadowsocks搭建与BBR加速</a></h1>
+          <h1 class="post-title" itemprop="name headline">Shadowsocks搭建与BBR加速</h1>
         
 
         <div class="post-meta">
@@ -350,25 +357,51 @@
       
 
       
-        
-          
-          Shadowsocks 搭建
-基于centos 7搭建了一个ss，用了一些时间记录一下方便以后  
+        <h1 id="Shadowsocks-搭建"><a href="#Shadowsocks-搭建" class="headerlink" title="Shadowsocks 搭建"></a>Shadowsocks 搭建</h1><ul>
+<li>基于centos 7搭建了一个ss，用了一些时间记录一下方便以后  </li>
+</ul>
+<ol>
+<li>获取vps，这次我采用的是DigitalOcean的vps</li>
+<li>安装pip  <ul>
+<li>安装epel扩展源<br><code>sudo yum install epel-release</code>  </li>
+<li>安装python-pip<br><code>sudo yum -y install python-pip</code>  </li>
+<li>升级pip<br><code>sudo pip install --upgrade pip</code>  </li>
+<li>清除cache<br><code>sudo yum clean all</code>  </li>
+</ul>
+</li>
+<li>配置shadowsocks   <ul>
+<li>安装shadowsocks<br><code>pip install shadowsocks</code>  </li>
+<li>新建配置文件<br><code>vi /etc/shadowsocks.json</code>  </li>
+<li>将下面的文件粘贴进去<br><code>{</code><br><code>&quot;server&quot;:&quot;server_ip&quot;,</code><br><code>&quot;server_port&quot;:8888,</code><br><code>&quot;local_address&quot;: &quot;127.0.0.1&quot;,</code><br><code>&quot;local_port&quot;:1080,</code><br><code>&quot;password&quot;:&quot;password&quot;,</code><br><code>&quot;timeout&quot;:300,</code><br><code>&quot;method&quot;:&quot;aes-256-cfb&quot;,</code><br><code>&quot;fast_open&quot;: false</code><br><code>}</code>  </li>
+<li>新建一个文件<br><code>vi /etc/systemd/system/shadowsocks.service</code></li>
+<li>输入以下内容<br><code>[Unit]</code><br><code>Description=Shadowsocks</code><br><code>[Service]</code><br><code>TimeoutStartSec=0</code><br><code>ExecStart=/usr/bin/ssserver -c /etc/shadowsocks.json</code><br><code>[Install]</code><br><code>WantedBy=multi-user.target</code>  </li>
+<li>安装防火墙<br><code>yum install firewalld</code><br><code>systemctl unmask firewalld</code><br><code>systemctl enable firewalld</code><br><code>systemctl start firewalld</code>  </li>
+<li>启用上面配置文件选择的端口<br><code>firewall-cmd --zone=public --add-port=8888/tcp --permanent</code>  </li>
+<li>查看端口是否开启<br><code>firewall-cmd --zone=public --query-port=8888/tcp</code></li>
+<li>启动ss<br><code>systemctl enable shadowsocks</code><br><code>systemctl start shadowsocks</code>  </li>
+<li>查看ss是否启动成功<br><code>systemctl status shadowsocks -l</code>  </li>
+</ul>
+</li>
+<li>安装加速<br> 找了好多锐速的脚本，均无法更换内核，所以采用BBR  <ol>
+<li>更新内核<ul>
+<li>安装ELRepo库<br><code>sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</code><br><code>sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</code>  </li>
+<li>更新内核<br><code>sudo yum --enablerepo=elrepo-kernel install kernel-ml -y</code>  </li>
+<li>查看内核<br><code>rpm -qa | grep kernel</code><br><img src="/2018/03/23/ss搭建/1.png" alt="1"><br>可以看到第二项是更新结果  </li>
+<li>查看启动内核<br><code>sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \&#39;</code><br><img src="/2018/03/23/ss搭建/2.png" alt="2">  </li>
+<li>修改默认项<br>可以看所需的启动项在第二项<br><code>sudo grub2-set-default 1</code>  </li>
+<li>重启服务器，查看重新查看内核  </li>
+</ul>
+</li>
+<li>启用BBR <ul>
+<li>修改系统配置<br><code>echo &#39;net.core.default_qdisc=fq&#39; | sudo tee -a /etc/sysctl.conf</code><br><code>echo &#39;net.ipv4.tcp_congestion_control=bbr&#39; | sudo tee -a /etc/sysctl.conf</code><br><code>sudo sysctl -p</code>  </li>
+<li>验证BBR是否开启<br><code>sudo sysctl net.ipv4.tcp_available_congestion_control</code><br><code>lsmod | grep bbr</code><br>输出结果与下面类似:<br><img src="/2018/03/23/ss搭建/3.png" alt="3"><br><img src="/2018/03/23/ss搭建/4.png" alt="4">  </li>
+</ul>
+</li>
+</ol>
+</li>
+<li>放一个链接以供测试<br> <a href="https://www.google.com/" target="_blank" rel="noopener">google</a></li>
+</ol>
 
-
-获取vps，这次我采用的是DigitalOcean的vps
-安装pip  
-安装epel扩展源sudo yum install epel-release  
-安装python-pipsudo yu
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/23/ss搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
       
     </div>
     
@@ -383,184 +416,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枫落">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枫叶飘飘落长空">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/21/hello-world/" itemprop="url">hello world</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-21T19:25:30+08:00">
-                2018-03-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-21T19:40:16+08:00">
-                2018-03-21
-              </time>
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/centos-7/" rel="tag"># centos 7</a>
           
-            
+            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
           
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  23
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          JAVA WEB 课程作业基于hexo与github page搭建的一个小博客图床链接
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/21/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/21/hello-world/" rel="next" title="hello world">
+                <i class="fa fa-chevron-left"></i> hello world
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -570,10 +457,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -581,6 +469,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -601,8 +493,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -682,6 +583,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shadowsocks-搭建"><span class="nav-number">1.</span> <span class="nav-text">Shadowsocks 搭建</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -844,6 +761,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

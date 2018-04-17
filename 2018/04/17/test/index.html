@@ -86,15 +86,15 @@
 <meta property="og:site_name" content="枫叶飘飘落长空">
 <meta property="og:description" content="Shadowsocks 搭建">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/04/17/test/test/1.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/17/test/test/2.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/17/test/test/3.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/17/test/test/4.PNG">
-<meta property="og:updated_time" content="2018-04-17T11:26:26.710Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/test/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/test/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/test/3.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/test/4.PNG">
+<meta property="og:updated_time" content="2018-04-17T11:32:57.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shadowsocks 搭建">
 <meta name="twitter:description" content="Shadowsocks 搭建">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/17/test/test/1.PNG">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/17/test/1.PNG">
 
 
 
@@ -291,7 +291,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-04-17T19:26:26+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-17T19:32:57+08:00">
                 2018-04-17
               </time>
             
@@ -386,15 +386,15 @@
 <li>更新内核<ul>
 <li>安装ELRepo库<br><code>sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</code><br><code>sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</code>  </li>
 <li>更新内核<br><code>sudo yum --enablerepo=elrepo-kernel install kernel-ml -y</code>  </li>
-<li>查看内核<br><code>rpm -qa | grep kernel</code><br><img src="/2018/04/17/test/./test/1.PNG" alt="1"><br>可以看到第二项是更新结果  </li>
-<li>查看启动内核<br><code>sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \&#39;</code><br><img src="/2018/04/17/test/./test/2.PNG" alt="2">  </li>
+<li>查看内核<br><code>rpm -qa | grep kernel</code><br><img src="/2018/04/17/test/1.PNG" alt="1"><br>可以看到第二项是更新结果  </li>
+<li>查看启动内核<br><code>sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \&#39;</code><br><img src="/2018/04/17/test/2.PNG" alt="2">  </li>
 <li>修改默认项<br>可以看所需的启动项在第二项<br><code>sudo grub2-set-default 1</code>  </li>
 <li>重启服务器，查看重新查看内核  </li>
 </ul>
 </li>
 <li>启用BBR <ul>
 <li>修改系统配置<br><code>echo &#39;net.core.default_qdisc=fq&#39; | sudo tee -a /etc/sysctl.conf</code><br><code>echo &#39;net.ipv4.tcp_congestion_control=bbr&#39; | sudo tee -a /etc/sysctl.conf</code><br><code>sudo sysctl -p</code>  </li>
-<li>验证BBR是否开启<br><code>sudo sysctl net.ipv4.tcp_available_congestion_control</code><br><code>lsmod | grep bbr</code><br>输出结果与下面类似:<br><img src="/2018/04/17/test/./test/3.PNG" alt="3"><br><img src="/2018/04/17/test/./test/4.PNG" alt="4">  </li>
+<li>验证BBR是否开启<br><code>sudo sysctl net.ipv4.tcp_available_congestion_control</code><br><code>lsmod | grep bbr</code><br>输出结果与下面类似:<br><img src="/2018/04/17/test/3.PNG" alt="3"><br><img src="/2018/04/17/test/4.PNG" alt="4">  </li>
 </ul>
 </li>
 </ol>
